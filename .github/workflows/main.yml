@@ -66,6 +66,6 @@ jobs:
       run: docker run -d -p 80:80 ${{ secrets.DOCKERHUB_TAGNAME }}/app
     - name: curl
       run: |
-        sleep 5
+        sleep 10
         curl http://localhost:80
         

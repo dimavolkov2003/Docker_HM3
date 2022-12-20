@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-nodejslab
+  labels:
+    app: nginx
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: nodejslab  
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nodejslab 
+    spec:
+      containers:
+      - image: app:v1   
+        imagePullPolicy: Never  
+        name: app-container  
+        ports: 
+        - containerPort: 80   
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
